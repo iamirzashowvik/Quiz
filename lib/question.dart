@@ -231,7 +231,9 @@ class _QuestionState extends State<Question> {
                           height: 50,
                           child: Center(
                             child: Text(
-                              link.documents[nindex].data()['answerA'],
+                              link.documents[nindex].data()['answerA'] != null
+                                  ? '${link.documents[nindex].data()['answerA']}'
+                                  : '',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -265,7 +267,9 @@ class _QuestionState extends State<Question> {
                           height: 50,
                           child: Center(
                             child: Text(
-                              link.documents[nindex].data()['answerB'],
+                              link.documents[nindex].data()['answerB'] != null
+                                  ? '${link.documents[nindex].data()['answerB']}'
+                                  : '',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -299,7 +303,9 @@ class _QuestionState extends State<Question> {
                           height: 50,
                           child: Center(
                             child: Text(
-                              link.documents[nindex].data()['answerC'],
+                              link.documents[nindex].data()['answerC'] != null
+                                  ? '${link.documents[nindex].data()['answerC']}'
+                                  : '',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -333,7 +339,9 @@ class _QuestionState extends State<Question> {
                           height: 50,
                           child: Center(
                             child: Text(
-                              link.documents[nindex].data()['answerD'],
+                              link.documents[nindex].data()['answerD'] != null
+                                  ? '${link.documents[nindex].data()['answerD']}'
+                                  : '',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
