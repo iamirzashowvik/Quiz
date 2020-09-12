@@ -13,8 +13,8 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
-  int timer = 10;
-  String showtimer = "10";
+  int timer = 30;
+  String showtimer = "30";
   var link;
   int nindex;
   int p;
@@ -42,9 +42,64 @@ class _QuestionState extends State<Question> {
     nextQuestion();
   }
 
+  void colorFunc(String answer, String s) {
+    if (answer == link.documents[nindex].data()['correct_answer'] && s == 'a') {
+      setState(() {
+        a = true;
+      });
+    } else if (answer == link.documents[nindex].data()['correct_answer'] &&
+        s == 'b') {
+      setState(() {
+        b = true;
+      });
+    } else if (answer == link.documents[nindex].data()['correct_answer'] &&
+        s == 'c') {
+      setState(() {
+        c = true;
+      });
+    } else {
+      setState(() {
+        d = true;
+      });
+    }
+  }
+
+  void cc() {
+    if (link.documents[nindex].data()['answerA'] ==
+        link.documents[nindex].data()['correct_answer']) {
+      setState(() {
+        a = true;
+      });
+    } else if (link.documents[nindex].data()['answerB'] ==
+        link.documents[nindex].data()['correct_answer']) {
+      setState(() {
+        b = true;
+      });
+    } else if (link.documents[nindex].data()['answerC'] ==
+        link.documents[nindex].data()['correct_answer']) {
+      setState(() {
+        c = true;
+      });
+    } else {
+      setState(() {
+        d = true;
+      });
+    }
+  }
+
+  bool a = false;
+  bool b = false;
+  bool c = false;
+  bool d = false;
   void nextQuestion() {
+    setState(() {
+      a = false;
+      b = false;
+      c = false;
+      d = false;
+    });
     canceltimer = false;
-    timer = 10;
+    timer = 30;
     if (n <= 20) {
       setState(() {
         nindex = random.nextInt(p);
@@ -56,6 +111,13 @@ class _QuestionState extends State<Question> {
     }
   }
 
+  Timer timerg;
+  void autoPress() {
+    timerg = new Timer(const Duration(seconds: 2), () {
+      nextQuestion();
+    });
+  }
+
   void starttimer() async {
     const onesec = Duration(seconds: 1);
     Timer.periodic(onesec, (Timer t) {
@@ -65,13 +127,16 @@ class _QuestionState extends State<Question> {
           setState(() {
             n++;
           });
-          nextQuestion();
+          cc();
+          autoPress();
+          // nextQuestion();
         } else if (canceltimer == true) {
           t.cancel();
           setState(() {
             n++;
           });
-          nextQuestion();
+          autoPress();
+          //  nextQuestion();
         } else {
           timer = timer - 1;
         }
@@ -211,6 +276,8 @@ class _QuestionState extends State<Question> {
                       onTap: () {
                         canceltimer = true;
 
+                        colorFunc(
+                            link.documents[nindex].data()['answerA'], 'a');
                         if (link.documents[nindex].data()['answerA'] ==
                             link.documents[nindex].data()['correct_answer']) {
                           setState(() {
@@ -235,7 +302,7 @@ class _QuestionState extends State<Question> {
                                   ? '${link.documents[nindex].data()['answerA']}'
                                   : '',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: a == false ? Colors.white : Colors.green,
                                 fontSize: 20,
                               ),
                             ),
@@ -246,7 +313,8 @@ class _QuestionState extends State<Question> {
                     GestureDetector(
                       onTap: () {
                         canceltimer = true;
-
+                        colorFunc(
+                            link.documents[nindex].data()['answerB'], 'b');
                         if (link.documents[nindex].data()['answerB'] ==
                             link.documents[nindex].data()['correct_answer']) {
                           setState(() {
@@ -271,7 +339,7 @@ class _QuestionState extends State<Question> {
                                   ? '${link.documents[nindex].data()['answerB']}'
                                   : '',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: b == false ? Colors.white : Colors.green,
                                 fontSize: 20,
                               ),
                             ),
@@ -282,7 +350,8 @@ class _QuestionState extends State<Question> {
                     GestureDetector(
                       onTap: () {
                         canceltimer = true;
-
+                        colorFunc(
+                            link.documents[nindex].data()['answerC'], 'c');
                         if (link.documents[nindex].data()['answerC'] ==
                             link.documents[nindex].data()['correct_answer']) {
                           setState(() {
@@ -307,7 +376,7 @@ class _QuestionState extends State<Question> {
                                   ? '${link.documents[nindex].data()['answerC']}'
                                   : '',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: c == false ? Colors.white : Colors.green,
                                 fontSize: 20,
                               ),
                             ),
@@ -318,6 +387,8 @@ class _QuestionState extends State<Question> {
                     GestureDetector(
                       onTap: () {
                         canceltimer = true;
+                        colorFunc(
+                            link.documents[nindex].data()['answerD'], 'd');
 
                         if (link.documents[nindex].data()['answerD'] ==
                             link.documents[nindex].data()['correct_answer']) {
@@ -343,7 +414,7 @@ class _QuestionState extends State<Question> {
                                   ? '${link.documents[nindex].data()['answerD']}'
                                   : '',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: d == false ? Colors.white : Colors.green,
                                 fontSize: 20,
                               ),
                             ),
