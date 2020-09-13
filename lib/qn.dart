@@ -57,20 +57,24 @@ class _CountDownTimerState extends State<CountDownTimer>
     if (answer == link.documents[nindex].data()['correct_answer'] && s == 'a') {
       setState(() {
         a = true;
+        aw = false;
       });
     } else if (answer == link.documents[nindex].data()['correct_answer'] &&
         s == 'b') {
       setState(() {
         b = true;
+        bw = false;
       });
     } else if (answer == link.documents[nindex].data()['correct_answer'] &&
         s == 'c') {
       setState(() {
         c = true;
+        cw = false;
       });
     } else {
       setState(() {
         d = true;
+        dw = false;
       });
     }
   }
@@ -113,6 +117,10 @@ class _CountDownTimerState extends State<CountDownTimer>
       b = false;
       c = false;
       d = false;
+      aw = false;
+      bw = false;
+      cw = false;
+      dw = false;
     });
     canceltimer = false;
     timer = 30;
@@ -162,6 +170,10 @@ class _CountDownTimerState extends State<CountDownTimer>
     });
   }
 
+  bool aw = false;
+  bool bw = false;
+  bool cw = false;
+  bool dw = false;
   int nc;
   int ss;
   showAlertDialog(BuildContext context) {
@@ -342,10 +354,13 @@ class _CountDownTimerState extends State<CountDownTimer>
                               GestureDetector(
                                 onTap: () {
                                   controller.stop();
-
+                                  setState(() {
+                                    aw = true;
+                                  });
                                   colorFunc(
                                       link.documents[nindex].data()['answerA'],
                                       'a');
+
                                   if (link.documents[nindex]
                                           .data()['answerA'] ==
                                       link.documents[nindex]
@@ -354,6 +369,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                       correct++;
                                     });
                                   }
+
                                   canceltimer = true;
                                 },
                                 child: Padding(
@@ -377,7 +393,9 @@ class _CountDownTimerState extends State<CountDownTimer>
                                             ? '${link.documents[nindex].data()['answerA']}'
                                             : '',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: aw == true
+                                              ? Colors.red
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
@@ -388,10 +406,13 @@ class _CountDownTimerState extends State<CountDownTimer>
                               GestureDetector(
                                 onTap: () {
                                   controller.stop();
-
+                                  setState(() {
+                                    bw = true;
+                                  });
                                   colorFunc(
                                       link.documents[nindex].data()['answerB'],
                                       'b');
+
                                   if (link.documents[nindex]
                                           .data()['answerB'] ==
                                       link.documents[nindex]
@@ -400,6 +421,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                       correct++;
                                     });
                                   }
+
                                   canceltimer = true;
                                 },
                                 child: Padding(
@@ -423,7 +445,9 @@ class _CountDownTimerState extends State<CountDownTimer>
                                             ? '${link.documents[nindex].data()['answerB']}'
                                             : '',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: bw == true
+                                              ? Colors.red
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
@@ -434,6 +458,9 @@ class _CountDownTimerState extends State<CountDownTimer>
                               GestureDetector(
                                 onTap: () {
                                   controller.stop();
+                                  setState(() {
+                                    cw = true;
+                                  });
 
                                   colorFunc(
                                       link.documents[nindex].data()['answerC'],
@@ -446,6 +473,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                       correct++;
                                     });
                                   }
+
                                   canceltimer = true;
                                 },
                                 child: Padding(
@@ -469,7 +497,9 @@ class _CountDownTimerState extends State<CountDownTimer>
                                             ? '${link.documents[nindex].data()['answerC']}'
                                             : '',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: cw == true
+                                              ? Colors.red
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
@@ -480,7 +510,9 @@ class _CountDownTimerState extends State<CountDownTimer>
                               GestureDetector(
                                 onTap: () {
                                   controller.stop();
-
+                                  setState(() {
+                                    dw = true;
+                                  });
                                   colorFunc(
                                       link.documents[nindex].data()['answerD'],
                                       'd');
@@ -493,6 +525,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                       correct++;
                                     });
                                   }
+
                                   canceltimer = true;
                                 },
                                 child: Padding(
@@ -516,7 +549,9 @@ class _CountDownTimerState extends State<CountDownTimer>
                                             ? '${link.documents[nindex].data()['answerD']}'
                                             : '',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: dw == true
+                                              ? Colors.red
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
