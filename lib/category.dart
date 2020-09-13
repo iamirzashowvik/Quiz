@@ -3,6 +3,7 @@ import 'package:responsive_widgets/responsive_widgets.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:share/share.dart';
+import 'package:squiz/qn.dart';
 
 import 'package:squiz/question.dart';
 
@@ -91,10 +92,13 @@ class _CategoryState extends State<Category> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Question(
-                                      document.get('name'),
-                                    ),
-                                  ));
+                                      builder: (context) =>
+                                          CountDownTimer(document.get('name'))
+                                      //  Question(
+
+                                      // )
+
+                                      ));
                             },
                             child: CategoryX(document.get('name')));
                       },
