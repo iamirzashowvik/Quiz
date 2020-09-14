@@ -47,20 +47,11 @@ class _CategoryState extends State<Category> {
           title: TextResponsive(
             'De Suriname quiz',
             style: TextStyle(
-              color: Colors.green,
-              fontSize: 100.h,
+              color: Color(0xff347F3D),
+              fontSize: 50,
             ),
           ),
           centerTitle: true,
-          // leading: Center(
-          //   child: TextResponsive(
-          //     'SQUIZ',
-          //     style: TextStyle(
-          //       color: Colors.green,
-          //       fontSize: 80.h,
-          //     ),
-          //   ),
-          // ),
         ),
         body: Column(
           children: <Widget>[
@@ -69,7 +60,7 @@ class _CategoryState extends State<Category> {
               child: Center(
                 child: TextResponsive(
                   'SABI DIRI',
-                  style: TextStyle(fontSize: 200.h, color: Colors.black),
+                  style: TextStyle(fontSize: 250.h, color: Colors.black),
                 ),
               ),
             ),
@@ -108,14 +99,14 @@ class _CategoryState extends State<Category> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xff347F3D),
           onPressed: () {
             Share.share(
                 'Test je kennis over Suriname! https://${b.data()['link']}',
                 subject: 'Look what I made!');
           },
           child: CircleAvatar(
-            backgroundColor: Colors.green,
+            backgroundColor: Color(0xff347F3D),
             child: Icon(
               Icons.share,
               color: Colors.white,
@@ -136,15 +127,15 @@ class CategoryX extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(12.0),
       child: Container(
-        height: 200.h,
-        color: Colors.green,
+        height: 150.h,
+        color: Color(0xff347F3D),
         child: Center(
           child: TextResponsive(
             name,
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 150.h,
-            ),
+                color: Colors.white,
+                fontSize: 150.h,
+                fontWeight: FontWeight.bold),
           ),
         ),
       ),

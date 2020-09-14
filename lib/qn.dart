@@ -58,24 +58,31 @@ class _CountDownTimerState extends State<CountDownTimer>
       setState(() {
         a = true;
         aw = false;
+        correct++;
       });
     } else if (answer == link.documents[nindex].data()['correct_answer'] &&
         s == 'b') {
       setState(() {
         b = true;
         bw = false;
+        correct++;
       });
     } else if (answer == link.documents[nindex].data()['correct_answer'] &&
         s == 'c') {
       setState(() {
         c = true;
         cw = false;
+        correct++;
       });
-    } else {
+    } else if (answer == link.documents[nindex].data()['correct_answer'] &&
+        s == 'd') {
       setState(() {
         d = true;
         dw = false;
+        correct++;
       });
+    } else {
+      cc();
     }
   }
 
@@ -231,7 +238,8 @@ class _CountDownTimerState extends State<CountDownTimer>
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(
-                      color: Colors.blue, //                   <--- border color
+                      color: Color(
+                          0xffEDC917), //                   <--- border color
                       width: 5,
                     ),
                   ),
@@ -290,7 +298,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                           Text(
                             link.documents[nindex].data()['question'],
                             style: TextStyle(
-                              color: Colors.yellow[400],
+                              color: Color(0xffEDC917),
                               fontSize: 25,
                             ),
                           ),
@@ -312,8 +320,8 @@ class _CountDownTimerState extends State<CountDownTimer>
                                                 painter: CustomTimerPainter(
                                                     animation: controller,
                                                     backgroundColor:
-                                                        Color(0xff0D2051),
-                                                    color: Color(0xffED1C37)
+                                                        Color(0xffEDC917),
+                                                    color: Color(0xffB50329)
                                                     //themeData.indicatorColor,
                                                     )),
                                           ),
@@ -342,12 +350,24 @@ class _CountDownTimerState extends State<CountDownTimer>
                               ],
                             ),
                           ),
-                          Text(
-                            'Total   :  $nc/20',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Text(
+                                'Correct Answer : $correct',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                'Total   :  $nc/20',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
                           ),
                           Column(
                             children: <Widget>[
@@ -361,15 +381,6 @@ class _CountDownTimerState extends State<CountDownTimer>
                                       link.documents[nindex].data()['answerA'],
                                       'a');
 
-                                  if (link.documents[nindex]
-                                          .data()['answerA'] ==
-                                      link.documents[nindex]
-                                          .data()['correct_answer']) {
-                                    setState(() {
-                                      correct++;
-                                    });
-                                  }
-
                                   canceltimer = true;
                                 },
                                 child: Padding(
@@ -380,7 +391,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                         color: a == false
                                             ? Colors.white
                                             : Color(
-                                                0xff00c853), //                   <--- border color
+                                                0xff347F3D), //                   <--- border color
                                         width: 2.5,
                                       ),
                                     ),
@@ -394,7 +405,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                             : '',
                                         style: TextStyle(
                                           color: aw == true
-                                              ? Colors.red
+                                              ? Color(0xffB50329)
                                               : Colors.white,
                                           fontSize: 20,
                                         ),
@@ -413,15 +424,6 @@ class _CountDownTimerState extends State<CountDownTimer>
                                       link.documents[nindex].data()['answerB'],
                                       'b');
 
-                                  if (link.documents[nindex]
-                                          .data()['answerB'] ==
-                                      link.documents[nindex]
-                                          .data()['correct_answer']) {
-                                    setState(() {
-                                      correct++;
-                                    });
-                                  }
-
                                   canceltimer = true;
                                 },
                                 child: Padding(
@@ -432,7 +434,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                         color: b == false
                                             ? Colors.white
                                             : Color(
-                                                0xff00c853), //                   <--- border color
+                                                0xff347F3D), //                   <--- border color
                                         width: 2.5,
                                       ),
                                     ),
@@ -446,7 +448,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                             : '',
                                         style: TextStyle(
                                           color: bw == true
-                                              ? Colors.red
+                                              ? Color(0xffB50329)
                                               : Colors.white,
                                           fontSize: 20,
                                         ),
@@ -465,14 +467,6 @@ class _CountDownTimerState extends State<CountDownTimer>
                                   colorFunc(
                                       link.documents[nindex].data()['answerC'],
                                       'c');
-                                  if (link.documents[nindex]
-                                          .data()['answerC'] ==
-                                      link.documents[nindex]
-                                          .data()['correct_answer']) {
-                                    setState(() {
-                                      correct++;
-                                    });
-                                  }
 
                                   canceltimer = true;
                                 },
@@ -484,7 +478,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                         color: c == false
                                             ? Colors.white
                                             : Color(
-                                                0xff00c853), //                   <--- border color
+                                                0xff347F3D), //                   <--- border color
                                         width: 2.5,
                                       ),
                                     ),
@@ -498,7 +492,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                             : '',
                                         style: TextStyle(
                                           color: cw == true
-                                              ? Colors.red
+                                              ? Color(0xffB50329)
                                               : Colors.white,
                                           fontSize: 20,
                                         ),
@@ -517,15 +511,6 @@ class _CountDownTimerState extends State<CountDownTimer>
                                       link.documents[nindex].data()['answerD'],
                                       'd');
 
-                                  if (link.documents[nindex]
-                                          .data()['answerD'] ==
-                                      link.documents[nindex]
-                                          .data()['correct_answer']) {
-                                    setState(() {
-                                      correct++;
-                                    });
-                                  }
-
                                   canceltimer = true;
                                 },
                                 child: Padding(
@@ -536,7 +521,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                         color: d == false
                                             ? Colors.white
                                             : Color(
-                                                0xff00c853), //                   <--- border color
+                                                0xff347F3D), //                   <--- border color
                                         width: 2.5,
                                       ),
                                     ),
@@ -550,7 +535,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                             : '',
                                         style: TextStyle(
                                           color: dw == true
-                                              ? Colors.red
+                                              ? Color(0xffB50329)
                                               : Colors.white,
                                           fontSize: 20,
                                         ),
