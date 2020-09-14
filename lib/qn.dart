@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:share/share.dart';
+import 'package:squiz/category.dart';
 
 class CountDownTimer extends StatefulWidget {
   final String question;
@@ -28,7 +29,7 @@ class _CountDownTimerState extends State<CountDownTimer>
   var link;
   int nindex;
   int p;
-  int n = 1;
+  int n = 19;
   bool canceltimer = false;
   int correct = 0;
   Random random = new Random();
@@ -139,7 +140,8 @@ class _CountDownTimerState extends State<CountDownTimer>
 
       starttimer();
     } else {
-      showAlertDialog(context);
+      _showDialog();
+      //showAlertDialog(context);
     }
   }
 
@@ -230,7 +232,10 @@ class _CountDownTimerState extends State<CountDownTimer>
           child: Center(
             child: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).pop();
+                  //   Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Category()));
                 },
                 child: Container(
                   height: 80,
@@ -260,6 +265,104 @@ class _CountDownTimerState extends State<CountDownTimer>
       context: context,
       builder: (BuildContext context) {
         return dialog;
+      },
+    );
+  }
+
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Text(
+            "Result",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 30,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: Column(
+            children: <Widget>[
+//              new Text(
+//                  "Correct Answer : $correct & Wrong Answer : ${20 - correct}"),
+//
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Center(
+                    child: Text(
+                  'Correct Answer : $correct',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                  ),
+                )),
+              ),
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Center(
+                    child: Text(
+                  'Wrong Answer : ${20 - correct}',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                  ),
+                )),
+              ),
+
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      Share.share(
+                          'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
+                          subject: 'Look what I made!');
+                    },
+                    child: Icon(
+                      Icons.share,
+                      size: 50,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: new GestureDetector(
+                  child: Container(
+                    height: 80,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                        color: Color(
+                            0xffEDC917), //                   <--- border color
+                        width: 5,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Start New Topic",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Category()));
+                  },
+                ),
+              ),
+            ],
+          ),
+          // actions: <Widget>[],
+        );
       },
     );
   }
