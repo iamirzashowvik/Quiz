@@ -23,13 +23,13 @@ class _CountDownTimerState extends State<CountDownTimer>
   }
 
 //ggggggggggggggggggggggggggggggggggggggggggggg
-
+  List<int> gg = [];
   int timer = 30;
   String showtimer = "30";
   var link;
   int nindex;
   int p;
-  int n = 19;
+  int n = 1;
   bool canceltimer = false;
   int correct = 0;
   Random random = new Random();
@@ -50,7 +50,8 @@ class _CountDownTimerState extends State<CountDownTimer>
       linkapp = b;
     });
     p = link.documents.length;
-
+    p = p - 1;
+    generateString(p);
     nextQuestion();
   }
 
@@ -114,7 +115,12 @@ class _CountDownTimerState extends State<CountDownTimer>
   bool b = false;
   bool c = false;
   bool d = false;
+  bool isClicked = false;
   void nextQuestion() {
+    setState(() {
+      isClicked = false;
+    });
+    generates();
     controller = AnimationController(
       vsync: this,
       duration: Duration(seconds: 30),
@@ -132,12 +138,14 @@ class _CountDownTimerState extends State<CountDownTimer>
     });
     canceltimer = false;
     timer = 30;
+    int g;
+    int h;
     if (n <= 20) {
+      h = list[n];
       setState(() {
-        nindex = random.nextInt(p);
+        nindex = h;
         nc = n;
       });
-
       starttimer();
     } else {
       _showDialog();
@@ -145,9 +153,17 @@ class _CountDownTimerState extends State<CountDownTimer>
     }
   }
 
+  var list = [];
+  void generateString(int x) {
+    list = List.generate(x, (index) => index + 1)..shuffle();
+
+    list.take(20).join('');
+    print(list);
+  }
+
   Timer timerg;
   void autoPress() {
-    timerg = new Timer(const Duration(seconds: 3), () {
+    timerg = new Timer(const Duration(seconds: 1), () {
       nextQuestion();
     });
   }
@@ -185,89 +201,89 @@ class _CountDownTimerState extends State<CountDownTimer>
   bool dw = false;
   int nc;
   int ss;
-  showAlertDialog(BuildContext context) {
-    SimpleDialog dialog = SimpleDialog(
-      title: Center(child: const Text('Result')),
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Center(
-              child: Text(
-            'Correct Answer : $correct',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 30,
-            ),
-          )),
-        ),
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Center(
-              child: Text(
-            'Wrong Answer : ${20 - correct}',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 30,
-            ),
-          )),
-        ),
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Center(
-            child: GestureDetector(
-              onTap: () {
-                Share.share(
-                    'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
-                    subject: 'Look what I made!');
-              },
-              child: Icon(
-                Icons.share,
-                size: 50,
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Center(
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                  //   Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Category()));
-                },
-                child: Container(
-                  height: 80,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                      color: Color(
-                          0xffEDC917), //                   <--- border color
-                      width: 5,
-                    ),
-                  ),
-                  child: Center(
-                      child: Text(
-                    'Start New Topic',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  )),
-                )),
-          ),
-        ),
-      ],
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return dialog;
-      },
-    );
-  }
+  // showAlertDialog(BuildContext context) {
+  //   SimpleDialog dialog = SimpleDialog(
+  //     title: Center(child: const Text('Result')),
+  //     children: <Widget>[
+  //       Padding(
+  //         padding: EdgeInsets.all(20.0),
+  //         child: Center(
+  //             child: Text(
+  //           'Correct Answer : $correct',
+  //           style: TextStyle(
+  //             color: Colors.black,
+  //             fontSize: 30,
+  //           ),
+  //         )),
+  //       ),
+  //       Padding(
+  //         padding: EdgeInsets.all(20.0),
+  //         child: Center(
+  //             child: Text(
+  //           'Wrong Answer : ${20 - correct}',
+  //           style: TextStyle(
+  //             color: Colors.black,
+  //             fontSize: 30,
+  //           ),
+  //         )),
+  //       ),
+  //       Padding(
+  //         padding: EdgeInsets.all(20.0),
+  //         child: Center(
+  //           child: GestureDetector(
+  //             onTap: () {
+  //               Share.share(
+  //                   'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
+  //                   subject: 'Look what I made!');
+  //             },
+  //             child: Icon(
+  //               Icons.share,
+  //               size: 50,
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //       Padding(
+  //         padding: EdgeInsets.all(20.0),
+  //         child: Center(
+  //           child: GestureDetector(
+  //               onTap: () {
+  //                 Navigator.of(context).pop();
+  //                 //   Navigator.pop(context);
+  //                 Navigator.push(context,
+  //                     MaterialPageRoute(builder: (context) => Category()));
+  //               },
+  //               child: Container(
+  //                 height: 80,
+  //                 width: 200,
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(30),
+  //                   border: Border.all(
+  //                     color: Color(
+  //                         0xffEDC917), //                   <--- border color
+  //                     width: 5,
+  //                   ),
+  //                 ),
+  //                 child: Center(
+  //                     child: Text(
+  //                   'Start New Topic',
+  //                   style: TextStyle(
+  //                     color: Colors.black,
+  //                     fontSize: 20,
+  //                   ),
+  //                 )),
+  //               )),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return dialog;
+  //     },
+  //   );
+  // }
 
   void _showDialog() {
     // flutter defined function
@@ -286,9 +302,6 @@ class _CountDownTimerState extends State<CountDownTimer>
           ),
           content: Column(
             children: <Widget>[
-//              new Text(
-//                  "Correct Answer : $correct & Wrong Answer : ${20 - correct}"),
-//
               Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Center(
@@ -311,7 +324,6 @@ class _CountDownTimerState extends State<CountDownTimer>
                   ),
                 )),
               ),
-
               Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Center(
@@ -361,10 +373,28 @@ class _CountDownTimerState extends State<CountDownTimer>
               ),
             ],
           ),
-          // actions: <Widget>[],
         );
       },
     );
+  }
+
+  List<int> abc = new List(4);
+  List<int> lists = new List(4);
+  void generates() {
+    lists = List.generate(4, (index) => index + 1)..shuffle();
+
+    lists.take(4).join('');
+    print(lists);
+    for (int i = 0; i < 4; i++) {
+      print('hhh ${lists[i] - 1}');
+      abc[i] = (lists[i] - 1);
+    }
+    print(abc[0]);
+    print(abc[1]);
+
+    print(abc[2]);
+
+    print(abc[3]);
   }
 
 //ggggggggggggggggggggggggggggggggggggggggggggggggggg
@@ -372,11 +402,185 @@ class _CountDownTimerState extends State<CountDownTimer>
   void initState() {
     super.initState();
     getData();
+    list = null;
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
+
+    List<Widget> option = [
+      link == null
+          ? Center(child: CircularProgressIndicator())
+          : GestureDetector(
+              onTap: isClicked == true
+                  ? () {}
+                  : () {
+                      isClicked = true;
+                      controller.stop();
+                      setState(() {
+                        aw = true;
+                      });
+                      colorFunc(link.documents[nindex].data()['answerA'], 'a');
+
+                      canceltimer = true;
+                    },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: a == false
+                          ? Colors.white
+                          : Color(
+                              0xff347F3D), //                   <--- border color
+                      width: 2.5,
+                    ),
+                  ),
+                  height: 60,
+                  child: Center(
+                    child: Text(
+                      link.documents[nindex].data()['answerA'] != null
+                          ? '${link.documents[nindex].data()['answerA']}'
+                          : '',
+                      style: TextStyle(
+                        color: aw == true ? Color(0xffB50329) : Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+      link == null
+          ? Center(child: CircularProgressIndicator())
+          : GestureDetector(
+              onTap: isClicked == true
+                  ? () {}
+                  : () {
+                      isClicked = true;
+                      controller.stop();
+                      setState(() {
+                        bw = true;
+                      });
+                      colorFunc(link.documents[nindex].data()['answerB'], 'b');
+
+                      canceltimer = true;
+                    },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: b == false
+                          ? Colors.white
+                          : Color(
+                              0xff347F3D), //                   <--- border color
+                      width: 2.5,
+                    ),
+                  ),
+                  height: 60,
+                  child: Center(
+                    child: Text(
+                      link.documents[nindex].data()['answerB'] != null
+                          ? '${link.documents[nindex].data()['answerB']}'
+                          : '',
+                      style: TextStyle(
+                        color: bw == true ? Color(0xffB50329) : Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+      link == null
+          ? Center(child: CircularProgressIndicator())
+          : GestureDetector(
+              onTap: isClicked == true
+                  ? () {}
+                  : () {
+                      isClicked = true;
+                      controller.stop();
+                      setState(() {
+                        cw = true;
+                      });
+
+                      colorFunc(link.documents[nindex].data()['answerC'], 'c');
+
+                      canceltimer = true;
+                    },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: c == false
+                          ? Colors.white
+                          : Color(
+                              0xff347F3D), //                   <--- border color
+                      width: 2.5,
+                    ),
+                  ),
+                  height: 60,
+                  child: Center(
+                    child: Text(
+                      link.documents[nindex].data()['answerC'] != null
+                          ? '${link.documents[nindex].data()['answerC']}'
+                          : '',
+                      style: TextStyle(
+                        color: cw == true ? Color(0xffB50329) : Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+      link == null
+          ? Center(child: CircularProgressIndicator())
+          : GestureDetector(
+              onTap: isClicked == true
+                  ? () {}
+                  : () {
+                      isClicked = true;
+                      controller.stop();
+                      setState(() {
+                        dw = true;
+                      });
+                      colorFunc(link.documents[nindex].data()['answerD'], 'd');
+
+                      canceltimer = true;
+                    },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: d == false
+                          ? Colors.white
+                          : Color(
+                              0xff347F3D), //                   <--- border color
+                      width: 2.5,
+                    ),
+                  ),
+                  height: 60,
+                  child: Center(
+                    child: Text(
+                      link.documents[nindex].data()['answerD'] != null
+                          ? '${link.documents[nindex].data()['answerD']}'
+                          : '',
+                      style: TextStyle(
+                        color: dw == true ? Color(0xffB50329) : Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+    ];
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white10,
@@ -399,7 +603,9 @@ class _CountDownTimerState extends State<CountDownTimer>
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           Text(
-                            link.documents[nindex].data()['question'],
+                            link.documents[nindex].data()['question'] == null
+                                ? ''
+                                : link.documents[nindex].data()['question'],
                             style: TextStyle(
                               color: Color(0xffEDC917),
                               fontSize: 25,
@@ -472,182 +678,26 @@ class _CountDownTimerState extends State<CountDownTimer>
                               ),
                             ],
                           ),
-                          Column(
-                            children: <Widget>[
-                              GestureDetector(
-                                onTap: () {
-                                  controller.stop();
-                                  setState(() {
-                                    aw = true;
-                                  });
-                                  colorFunc(
-                                      link.documents[nindex].data()['answerA'],
-                                      'a');
+                          // Column(
+                          //  children: <Widget>[
+                          //    option[lists[0]],
+                          //  option[lists[1]],
+                          //option[lists[2]],
+                          // option[lists[3]],
+                          //],
 
-                                  canceltimer = true;
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: a == false
-                                            ? Colors.white
-                                            : Color(
-                                                0xff347F3D), //                   <--- border color
-                                        width: 2.5,
-                                      ),
-                                    ),
-                                    height: 60,
-                                    child: Center(
-                                      child: Text(
-                                        link.documents[nindex]
-                                                    .data()['answerA'] !=
-                                                null
-                                            ? '${link.documents[nindex].data()['answerA']}'
-                                            : '',
-                                        style: TextStyle(
-                                          color: aw == true
-                                              ? Color(0xffB50329)
-                                              : Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  controller.stop();
-                                  setState(() {
-                                    bw = true;
-                                  });
-                                  colorFunc(
-                                      link.documents[nindex].data()['answerB'],
-                                      'b');
-
-                                  canceltimer = true;
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: b == false
-                                            ? Colors.white
-                                            : Color(
-                                                0xff347F3D), //                   <--- border color
-                                        width: 2.5,
-                                      ),
-                                    ),
-                                    height: 60,
-                                    child: Center(
-                                      child: Text(
-                                        link.documents[nindex]
-                                                    .data()['answerB'] !=
-                                                null
-                                            ? '${link.documents[nindex].data()['answerB']}'
-                                            : '',
-                                        style: TextStyle(
-                                          color: bw == true
-                                              ? Color(0xffB50329)
-                                              : Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  controller.stop();
-                                  setState(() {
-                                    cw = true;
-                                  });
-
-                                  colorFunc(
-                                      link.documents[nindex].data()['answerC'],
-                                      'c');
-
-                                  canceltimer = true;
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: c == false
-                                            ? Colors.white
-                                            : Color(
-                                                0xff347F3D), //                   <--- border color
-                                        width: 2.5,
-                                      ),
-                                    ),
-                                    height: 60,
-                                    child: Center(
-                                      child: Text(
-                                        link.documents[nindex]
-                                                    .data()['answerC'] !=
-                                                null
-                                            ? '${link.documents[nindex].data()['answerC']}'
-                                            : '',
-                                        style: TextStyle(
-                                          color: cw == true
-                                              ? Color(0xffB50329)
-                                              : Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  controller.stop();
-                                  setState(() {
-                                    dw = true;
-                                  });
-                                  colorFunc(
-                                      link.documents[nindex].data()['answerD'],
-                                      'd');
-
-                                  canceltimer = true;
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: d == false
-                                            ? Colors.white
-                                            : Color(
-                                                0xff347F3D), //                   <--- border color
-                                        width: 2.5,
-                                      ),
-                                    ),
-                                    height: 60,
-                                    child: Center(
-                                      child: Text(
-                                        link.documents[nindex]
-                                                    .data()['answerD'] !=
-                                                null
-                                            ? '${link.documents[nindex].data()['answerD']}'
-                                            : '',
-                                        style: TextStyle(
-                                          color: dw == true
-                                              ? Color(0xffB50329)
-                                              : Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+//
+                          //)
+                          Container(
+                            height: 304,
+                            child: Column(
+                              children: <Widget>[
+                                option[abc[0]],
+                                option[abc[1]],
+                                option[abc[2]],
+                                option[abc[3]]
+                              ],
+                            ),
                           )
                         ],
                       ),
