@@ -1,10 +1,17 @@
-name: Build
-on: [pull_request, push]
+name: build
+on: push
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-      - name: Build the app
-        run: ./gradlew build
+    - id: set-matrix
+      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.job1.outputs.matrix)}}
+    steps:
+    - run: build
