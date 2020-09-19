@@ -366,7 +366,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                   ),
                   onTap: () {
                     Navigator.of(context).pop();
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Category()));
                   },
                 ),
@@ -602,13 +602,16 @@ class _CountDownTimerState extends State<CountDownTimer>
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text(
-                            link.documents[nindex].data()['question'] == null
-                                ? ''
-                                : link.documents[nindex].data()['question'],
-                            style: TextStyle(
-                              color: Color(0xffEDC917),
-                              fontSize: 25,
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              link.documents[nindex].data()['question'] == null
+                                  ? ''
+                                  : link.documents[nindex].data()['question'],
+                              style: TextStyle(
+                                color: Color(0xffEDC917),
+                                fontSize: 25,
+                              ),
                             ),
                           ),
                           Padding(

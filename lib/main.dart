@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:squiz/category.dart';
 import 'package:squiz/loading_screen.dart';
 
 void main() async {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     );
     return MaterialApp(initialRoute: 'Category', routes: {
       'Category': (context) => LoadingScreen(),
+      'gg': (context) => Category(),
     });
   }
 }
