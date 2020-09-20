@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,10 +60,13 @@ class _CategoryState extends State<Category> {
             Container(
               height: 300.h,
               child: Center(
-                child: TextResponsive(
-                  'SABI DIRI',
-                  style: TextStyle(fontSize: 250.h, color: Colors.black),
-                ),
+                child: TextResponsive('SABI DIRI',
+                    style: GoogleFonts.hanalei(
+                        fontSize: 250.h, color: Colors.black)
+//                  TextStyle(fontSize: 250.h,
+//
+//                      color: Colors.black),
+                    ),
               ),
             ),
             StreamBuilder(

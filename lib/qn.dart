@@ -293,7 +293,7 @@ class _CountDownTimerState extends State<CountDownTimer>
         // return object of type Dialog
         return AlertDialog(
           title: Text(
-            "Result",
+            "Resultaat",
             style: TextStyle(
               color: Colors.black,
               fontSize: 30,
@@ -306,7 +306,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                 padding: EdgeInsets.all(20.0),
                 child: Center(
                     child: Text(
-                  'Correct Answer : $correct',
+                  'Aantal Goed : $correct',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 30,
@@ -317,7 +317,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                 padding: EdgeInsets.all(20.0),
                 child: Center(
                     child: Text(
-                  'Wrong Answer : ${20 - correct}',
+                  'Aantal Fout : ${20 - correct}',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 30,
@@ -356,7 +356,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                     ),
                     child: Center(
                       child: Text(
-                        "Start New Topic",
+                        "Kies enn categorie",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -666,7 +666,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               Text(
-                                'Correct Answer : $correct',
+                                'Aantal Goed : $correct',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
