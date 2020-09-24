@@ -201,97 +201,17 @@ class _CountDownTimerState extends State<CountDownTimer>
   bool dw = false;
   int nc;
   int ss;
-  // showAlertDialog(BuildContext context) {
-  //   SimpleDialog dialog = SimpleDialog(
-  //     title: Center(child: const Text('Result')),
-  //     children: <Widget>[
-  //       Padding(
-  //         padding: EdgeInsets.all(20.0),
-  //         child: Center(
-  //             child: Text(
-  //           'Correct Answer : $correct',
-  //           style: TextStyle(
-  //             color: Colors.black,
-  //             fontSize: 30,
-  //           ),
-  //         )),
-  //       ),
-  //       Padding(
-  //         padding: EdgeInsets.all(20.0),
-  //         child: Center(
-  //             child: Text(
-  //           'Wrong Answer : ${20 - correct}',
-  //           style: TextStyle(
-  //             color: Colors.black,
-  //             fontSize: 30,
-  //           ),
-  //         )),
-  //       ),
-  //       Padding(
-  //         padding: EdgeInsets.all(20.0),
-  //         child: Center(
-  //           child: GestureDetector(
-  //             onTap: () {
-  //               Share.share(
-  //                   'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
-  //                   subject: 'Look what I made!');
-  //             },
-  //             child: Icon(
-  //               Icons.share,
-  //               size: 50,
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //       Padding(
-  //         padding: EdgeInsets.all(20.0),
-  //         child: Center(
-  //           child: GestureDetector(
-  //               onTap: () {
-  //                 Navigator.of(context).pop();
-  //                 //   Navigator.pop(context);
-  //                 Navigator.push(context,
-  //                     MaterialPageRoute(builder: (context) => Category()));
-  //               },
-  //               child: Container(
-  //                 height: 80,
-  //                 width: 200,
-  //                 decoration: BoxDecoration(
-  //                   borderRadius: BorderRadius.circular(30),
-  //                   border: Border.all(
-  //                     color: Color(
-  //                         0xffEDC917), //                   <--- border color
-  //                     width: 5,
-  //                   ),
-  //                 ),
-  //                 child: Center(
-  //                     child: Text(
-  //                   'Start New Topic',
-  //                   style: TextStyle(
-  //                     color: Colors.black,
-  //                     fontSize: 20,
-  //                   ),
-  //                 )),
-  //               )),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return dialog;
-  //     },
-  //   );
-  // }
 
   void _showDialog() {
     // flutter defined function
     showDialog(
       context: context,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
           title: Text(
             "Resultaat",
             style: TextStyle(
@@ -300,78 +220,97 @@ class _CountDownTimerState extends State<CountDownTimer>
             ),
             textAlign: TextAlign.center,
           ),
-          content: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Center(
-                    child: Text(
-                  'Aantal Goed : $correct',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
+          content: Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: new BoxDecoration(
+                gradient: new LinearGradient(
+              colors: [Colors.red, Colors.yellow],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            )),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Center(
+                      child: Text(
+                    'Aantal Goed : $correct',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                    ),
+                  )),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Center(
+                      child: Text(
+                    'Aantal Fout : ${20 - correct}',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                    ),
+                  )),
+                ),
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color:
+                          Colors.white, //                   <--- border color
+                      width: 5,
+                    ),
                   ),
-                )),
-              ),
-              Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Center(
-                    child: Text(
-                  'Aantal Fout : ${20 - correct}',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                  ),
-                )),
-              ),
-              Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      Share.share(
-                          'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
-                          subject: 'Look what I made!');
-                    },
-                    child: Icon(
-                      Icons.share,
-                      size: 50,
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Share.share(
+                            'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
+                            subject: 'Look what I made!');
+                      },
+                      child: Icon(
+                        Icons.share,
+                        size: 50,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: new GestureDetector(
-                  child: Container(
-                    height: 80,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(
-                        color: Color(
-                            0xffEDC917), //                   <--- border color
-                        width: 5,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: new GestureDetector(
+                    child: Container(
+                      height: 80,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(
+                          color: Colors
+                              .white, //                   <--- border color
+                          width: 5,
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Kies enn categorie",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
+                      child: Center(
+                        child: Text(
+                          "Kies een categorie",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Category()));
+                    },
                   ),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Category()));
-                  },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -673,7 +612,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                 ),
                               ),
                               Text(
-                                'Total   :  $nc/20',
+                                'Totaal   :  $nc/20',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -701,6 +640,9 @@ class _CountDownTimerState extends State<CountDownTimer>
                                 option[abc[3]]
                               ],
                             ),
+                          ),
+                          Container(
+                            height: 15,
                           )
                         ],
                       ),

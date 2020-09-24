@@ -166,6 +166,7 @@ class _CategoryState extends State<Category> {
             ),
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       ),
     );
   }
