@@ -13,11 +13,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     super.initState();
     Future.delayed(
-        const Duration(seconds: 2),
-        () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Category()),
-            ));
+      const Duration(seconds: 2),
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Category()),
+      ),
+    );
   }
 
   @override
