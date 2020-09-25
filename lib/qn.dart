@@ -209,83 +209,59 @@ class _CountDownTimerState extends State<CountDownTimer>
       barrierDismissible: true,
       builder: (BuildContext context) {
         // return object of type Dialog
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          title: Text(
-            "Resultaat",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 30,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          content: Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: new BoxDecoration(
-                gradient: new LinearGradient(
-              colors: [Colors.red, Colors.yellow],
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-            )),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Center(
-                      child: Text(
-                    'Aantal Goed : $correct',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
-                    ),
-                  )),
+        return Theme(
+          data: ThemeData(dialogBackgroundColor: Colors.orange),
+          child: Expanded(
+            child: AlertDialog(
+              // backgroundColor: Colors.red,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              title: Text(
+                "Resultaat",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
                 ),
-                Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Center(
-                      child: Text(
-                    'Aantal Fout : ${20 - correct}',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
+                textAlign: TextAlign.center,
+              ),
+              content: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: new BoxDecoration(
+                    gradient: new LinearGradient(
+                  colors: [Colors.red, Colors.yellow],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                )),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Center(
+                          child: Text(
+                        'Aantal Goed : $correct',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                        ),
+                      )),
                     ),
-                  )),
-                ),
-                Container(
-                  height: 80,
-                  width: 80,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color:
-                          Colors.white, //                   <--- border color
-                      width: 5,
+                    Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Center(
+                          child: Text(
+                        'Aantal Fout : ${20 - correct}',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                        ),
+                      )),
                     ),
-                  ),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        Share.share(
-                            'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
-                            subject: 'Look what I made!');
-                      },
-                      child: Icon(
-                        Icons.share,
-                        size: 50,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new GestureDetector(
-                    child: Container(
+                    Container(
                       height: 80,
-                      width: 200,
+                      width: 80,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        shape: BoxShape.circle,
                         border: Border.all(
                           color: Colors
                               .white, //                   <--- border color
@@ -293,23 +269,55 @@ class _CountDownTimerState extends State<CountDownTimer>
                         ),
                       ),
                       child: Center(
-                        child: Text(
-                          "Kies een categorie",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
+                        child: GestureDetector(
+                          onTap: () {
+                            Share.share(
+                                'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
+                                subject: 'Look what I made!');
+                          },
+                          child: Icon(
+                            Icons.share,
+                            size: 50,
                           ),
                         ),
                       ),
                     ),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Category()));
-                    },
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: new GestureDetector(
+                        child: Container(
+                          height: 80,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(
+                              color: Colors
+                                  .white, //                   <--- border color
+                              width: 5,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Kies een categorie",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Category()));
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         );
@@ -382,6 +390,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                       link.documents[nindex].data()['answerA'] != null
                           ? '${link.documents[nindex].data()['answerA']}'
                           : '',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: aw == true ? Color(0xffB50329) : Colors.white,
                         fontSize: 20,
@@ -424,6 +433,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                       link.documents[nindex].data()['answerB'] != null
                           ? '${link.documents[nindex].data()['answerB']}'
                           : '',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: bw == true ? Color(0xffB50329) : Colors.white,
                         fontSize: 20,
@@ -467,6 +477,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                       link.documents[nindex].data()['answerC'] != null
                           ? '${link.documents[nindex].data()['answerC']}'
                           : '',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: cw == true ? Color(0xffB50329) : Colors.white,
                         fontSize: 20,
@@ -509,6 +520,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                       link.documents[nindex].data()['answerD'] != null
                           ? '${link.documents[nindex].data()['answerD']}'
                           : '',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: dw == true ? Color(0xffB50329) : Colors.white,
                         fontSize: 20,

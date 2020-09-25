@@ -413,6 +413,7 @@ class _QuestionState extends State<Question> {
                               link.documents[nindex].data()['answerD'] != null
                                   ? '${link.documents[nindex].data()['answerD']}'
                                   : '',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: d == false ? Colors.white : Colors.green,
                                 fontSize: 20,
