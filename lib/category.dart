@@ -182,7 +182,10 @@ class CategoryX extends StatelessWidget {
       padding: EdgeInsets.all(12.0),
       child: Container(
         height: 150.h,
-        color: Color(0xff347F3D),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          color: Color(0xff347F3D),
+        ),
         child: Center(
           child: TextResponsive(
             name,
