@@ -22,6 +22,12 @@ class _CountDownTimerState extends State<CountDownTimer>
     return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
 //ggggggggggggggggggggggggggggggggggggggggggggg
   List<int> gg = [];
   int timer = 30;
@@ -211,112 +217,110 @@ class _CountDownTimerState extends State<CountDownTimer>
         // return object of type Dialog
         return Theme(
           data: ThemeData(dialogBackgroundColor: Colors.orange),
-          child: Expanded(
-            child: AlertDialog(
-              // backgroundColor: Colors.red,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              title: Text(
-                "Resultaat",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                ),
-                textAlign: TextAlign.center,
+          child: AlertDialog(
+            // backgroundColor: Colors.red,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            title: Text(
+              "Resultaat",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 30,
               ),
-              content: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: new BoxDecoration(
-                    gradient: new LinearGradient(
-                  colors: [Colors.red, Colors.yellow],
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                )),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Center(
-                          child: Text(
-                        'Aantal Goed : $correct',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                        ),
-                      )),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Center(
-                          child: Text(
-                        'Aantal Fout : ${20 - correct}',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                        ),
-                      )),
-                    ),
-                    Container(
-                      height: 80,
-                      width: 80,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors
-                              .white, //                   <--- border color
-                          width: 5,
-                        ),
+              textAlign: TextAlign.center,
+            ),
+            content: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: new BoxDecoration(
+                  gradient: new LinearGradient(
+                colors: [Colors.red, Colors.yellow],
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+              )),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Center(
+                        child: Text(
+                      'Aantal Goed : $correct',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
                       ),
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Share.share(
-                                'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
-                                subject: 'Look what I made!');
-                          },
-                          child: Icon(
-                            Icons.share,
-                            size: 50,
-                          ),
-                        ),
+                    )),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Center(
+                        child: Text(
+                      'Aantal Fout : ${20 - correct}',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
+                      ),
+                    )),
+                  ),
+                  Container(
+                    height: 80,
+                    width: 80,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color:
+                            Colors.white, //                   <--- border color
+                        width: 5,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: new GestureDetector(
-                        child: Container(
-                          height: 80,
-                          width: 200,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(
-                              color: Colors
-                                  .white, //                   <--- border color
-                              width: 5,
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Kies een categorie",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
+                    child: Center(
+                      child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Category()));
+                          Share.share(
+                              'My Currect  Answer : $correct . Test je kennis over Suriname! https://${linkapp.data()['link']}',
+                              subject: 'Look what I made!');
                         },
+                        child: Icon(
+                          Icons.share,
+                          size: 50,
+                        ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new GestureDetector(
+                      child: Container(
+                        height: 80,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                            color: Colors
+                                .white, //                   <--- border color
+                            width: 5,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Kies een categorie",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Category()));
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
