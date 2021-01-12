@@ -1,5 +1,8 @@
 # squiz
 
+
+Playstore link_ https://play.google.com/store/apps/details?id=com.blinkedge.suriquiz
+
 # A Quiz App Made with Flutter & Firebase
 
 
